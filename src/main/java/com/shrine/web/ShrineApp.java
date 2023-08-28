@@ -13,6 +13,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class ShrineApp {
     public static void main(String[] args) {
         SpringApplication.run(ShrineApp.class,args);
-        log.info("project run success...");
+        log.info("project run success $$$$$$$$$$$$$$$$$$$$$$$$$");
     }
 }

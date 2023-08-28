@@ -14,7 +14,7 @@ import java.util.List;
 public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        log.info("开始进行静态资源映射。。。");
+        log.info("Start static resource mapping $$$$$$$$$$$$$$$$$$$$$$$$$");
         registry.addResourceHandler("/**").addResourceLocations("classpath:/");      //通配符
     }
 
