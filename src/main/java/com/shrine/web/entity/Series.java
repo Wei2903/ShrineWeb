@@ -17,9 +17,6 @@ public class Series implements Serializable {
     private String des;
     private String title;
     private String logo;
-    private List<Author> authors;
-    private List<Chapter> chapters;
-    private List<Cast> casts;
 
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
