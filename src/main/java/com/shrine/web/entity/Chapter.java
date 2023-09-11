@@ -8,11 +8,10 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-public class Chaptor implements Serializable {
+public class Chapter implements Serializable {
     private static final Long serialVersionUID = 1L;
     private Long id;
     private Long seriesId;
-    private Long creatorId;
     private Long number;
     private String title;
     private int finish;

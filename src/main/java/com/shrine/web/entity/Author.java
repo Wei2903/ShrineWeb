@@ -14,7 +14,6 @@ public class Author implements Serializable {
     private Long id;
     private String image;
     private String name;
-    private Long seriesId;
     private int status;
 
     @TableField(fill = FieldFill.INSERT)
