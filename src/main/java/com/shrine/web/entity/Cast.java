@@ -12,8 +12,6 @@ public class Cast implements Serializable {
     private static final Long serialVersionUID = 1L;
     private Long id;
     private Long seriesId;
-    private Long creatorId;
-    private Long castId;
     private String title;
     private String des;
     private String image;
