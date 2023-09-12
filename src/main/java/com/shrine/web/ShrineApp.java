@@ -3,8 +3,10 @@ package com.shrine.web;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.shrine.web.entity.Author;
+import com.shrine.web.entity.Chapter;
 import com.shrine.web.entity.Series;
 import com.shrine.web.mapper.AuthorMapper;
+import com.shrine.web.mapper.ChapterMapper;
 import com.shrine.web.mapper.SeriesMapper;
 import com.shrine.web.service.SeriesService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,9 +26,6 @@ import java.util.List;
 public class ShrineApp {
     public static void main(String[] args) {
         ApplicationContext ioc = SpringApplication.run(ShrineApp.class, args);
-        SeriesService bean = ioc.getBean(SeriesService.class);
-        List<Series> series = bean.queryAllSeries();
-        System.out.println(series);
         log.info("project run success $$$$$$$$$$$$$$$$$$$$$$$$$");
     }
 }

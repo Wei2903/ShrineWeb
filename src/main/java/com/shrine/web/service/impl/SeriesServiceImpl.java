@@ -13,11 +13,17 @@ import java.util.List;
 public class SeriesServiceImpl
         extends ServiceImpl<SeriesMapper, Series>
         implements SeriesService {
+
     @Autowired
     SeriesMapper seriesMapper;
 
     @Override
     public List<Series> queryAllSeries() {
-        return seriesMapper.selectList(null);
+        return seriesMapper.getAllSeries();
+    }
+
+    @Override
+    public Series querySeriesDetail(Integer id) {
+        return seriesMapper.getSeriesDetailBySeriesId(id);
     }
 }
