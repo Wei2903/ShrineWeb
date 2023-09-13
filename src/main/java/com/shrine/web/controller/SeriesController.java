@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -19,7 +20,7 @@ public class SeriesController {
 
     @GetMapping("/home")
     @ResponseBody
-    public List<Series> getAllSeries(){
+    public List<Series> getAllSeries(HttpServletResponse response){
         return seriesService.queryAllSeries();
     }
 

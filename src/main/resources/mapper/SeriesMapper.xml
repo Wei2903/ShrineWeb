@@ -24,7 +24,7 @@
     <!--return Series for homepage, do not need description-->
     <select id="getAllSeries" resultType="com.shrine.web.entity.Series">
         SELECT
-        s.id, s.portraitImage, s.landImage, s.title, s.logo, s.status
+        s.id, s.portraitImage, s.landImage, s.title, s.logo, s.status, s.updatedAt
         FROM series s WHERE s.status = 1
     </select>
 
