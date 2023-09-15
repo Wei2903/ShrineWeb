@@ -11,12 +11,24 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/shrine_testing?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: Ablevari3?!
+    password: 1234
+
+  mail:
+    host: mail.shrinecomics.com
+    port: 465
+    username: noreply@shrinecomics.com
+    password: yk26tFX-H-z-Whw
+    protocol: smtps
+    properties.mail.smtp:
+      auth: true
+      ssl.trust: mail.shrinecomics.com
+
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: false
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    meta-object-handler: com.shrine.web.common.MyMetaObjectHandler
   global-config:
     banner: false
     db-config:

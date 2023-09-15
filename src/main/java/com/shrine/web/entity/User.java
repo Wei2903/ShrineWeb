@@ -18,8 +18,12 @@ public class User implements Serializable {
     private String apiKey;
     private String token;
     private int role;
-    private String profileType;
+    private int profileType;
+    private int verify;     //1 = verified 0 = unverified
+    private String verifyToken;
+    private String profile;
     private Long profileId;
+    private int defaultValue;
     private int is_deleted;
 
 
