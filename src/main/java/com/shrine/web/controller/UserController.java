@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,11 +28,14 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<?> login(@RequestBody User user){
+    public ResponseEntity<?> login(@RequestBody User user, HttpServletRequest request){
         log.info("user: {}",user);
         LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
         lqw.eq(User::getEmail,user.getEmail());
         User one = userService.getOne(lqw);
+        // Add User to Session
+        HttpSession session = request.getSession();
+        session.setAttribute("user", one);
         System.out.println(one);
         if(one == null){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Account doesn't exist");

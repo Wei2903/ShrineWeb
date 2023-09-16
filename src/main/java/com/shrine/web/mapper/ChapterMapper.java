@@ -9,4 +9,6 @@ import java.util.List;
 @Mapper
 public interface ChapterMapper extends BaseMapper<Chapter> {
     List<Chapter> queryChaptersBySeriesId(Integer id);
+
+    Chapter getDetailedChapter(Integer chapterId);
 }

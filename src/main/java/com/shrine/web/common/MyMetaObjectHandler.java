@@ -14,14 +14,20 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         log.info("公共字段自动填充[insert]...");
         log.info(metaObject.toString());
-        metaObject.setValue("createdAt", LocalDateTime.now());
-        metaObject.setValue("updatedAt", LocalDateTime.now());
+        if (metaObject.hasSetter("createdAt")){
+            metaObject.setValue("createdAt", LocalDateTime.now());
+        }
+        if (metaObject.hasSetter("updatedAt")){
+            metaObject.setValue("updatedAt", LocalDateTime.now());
+        }
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         log.info("公共字段自动填充[update]...");
         log.info(metaObject.toString());
-        metaObject.setValue("updatedAt", LocalDateTime.now());
+        if (metaObject.hasSetter("updatedAt")){
+            metaObject.setValue("updatedAt", LocalDateTime.now());
+        }
     }
 }

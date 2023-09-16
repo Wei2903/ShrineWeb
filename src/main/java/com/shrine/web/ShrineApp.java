@@ -2,12 +2,8 @@ package com.shrine.web;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.shrine.web.entity.Author;
-import com.shrine.web.entity.Chapter;
-import com.shrine.web.entity.Series;
-import com.shrine.web.mapper.AuthorMapper;
-import com.shrine.web.mapper.ChapterMapper;
-import com.shrine.web.mapper.SeriesMapper;
+import com.shrine.web.entity.*;
+import com.shrine.web.mapper.*;
 import com.shrine.web.service.SeriesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;

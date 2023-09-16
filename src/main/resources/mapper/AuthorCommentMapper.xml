@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shrine.web.mapper.AuthorCommentMapper">
+    <resultMap id="authorCommentResultMap" type="com.shrine.web.entity.AuthorComment">
+        <id column="id" property="id"/>
+        <result property="pageId" column="pageId"/>
+        <result property="x" column="x"/>
+        <result property="y" column="y"/>
+        <result property="comment" column="comment"/>
+        <result property="authorId" column="authorId"/>
+        <result property="createdAt" column="createdAt"/>
+        <association property="author" javaType="com.shrine.web.entity.Author">
+            <result property="name" column="name"/>
+            <result property="image" column="image"/>
+        </association>
+        <collection property="comments"
+                    select="com.shrine.web.mapper.CommentMapper.getToAuthorCommentByPageIdAndAuthorCommentId"
+                    column="{pageId=pageId, authorCommentId=id}"/>
+    </resultMap>
+
+    <select id="getAuthorCommentByPageId" parameterType="Integer" resultMap="authorCommentResultMap">
+        SELECT ac.*, a.name, a.image FROM `author_comment` AS ac JOIN `author` AS a
+        ON ac.`authorId` = a.`id` WHERE `pageId` = #{pageId}
+    </select>
+</mapper>

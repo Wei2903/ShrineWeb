@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shrine.web.mapper.CommentMapper">
+    <resultMap id="commentResultMap" type="com.shrine.web.entity.Comment">
+        <id property="id" column="id"/>
+        <result property="pageId" column="pageId"/>
+        <result property="x" column="x"/>
+        <result property="y" column="y"/>
+        <result property="comment" column="comment"/>
+        <result property="userId" column="userId"/>
+        <result property="authorCommentId" column="authorCommentId"/>
+        <result property="createdAt" column="createdAt"/>
+        <association property="user" javaType="com.shrine.web.entity.User">
+            <id column="id" property="id"/>
+            <result property="name" column="name"/>
+            <result property="profileType" column="profileType"/>
+            <result property="profile" column="profile"/>
+            <result property="profileId" column="profileId"/>
+        </association>
+    </resultMap>
+
+    <select id="getCommentsByPageId" parameterType="Integer" resultMap="commentResultMap">
+        SELECT c.`id`, c.`pageId`, c.`x`, c.`y`, c.`userId`, c.`comment`, c.`authorCommentId`, c.`createdAt`,
+        u.`name`, u.`profileType`, u.`profile`, u.`profileId` FROM `comment` AS c JOIN `user` AS u
+        ON c.`userid` = u.`id`
+        WHERE c.`pageId` = #{pageId} AND c.`authorCommentId` = 0
+    </select>
+
+    <select id="getToAuthorCommentByPageIdAndAuthorCommentId" resultMap="commentResultMap">
+        SELECT c.`id`, c.`pageId`, c.`x`, c.`y`, c.`userId`, c.`comment`, c.`authorCommentId`, c.`createdAt`,
+        u.`name`, u.`profileType`, u.`profile`, u.`profileId` FROM `comment` AS c JOIN `user` AS u
+        ON c.`userid` = u.`id`
+        WHERE c.`pageId` = #{pageId} AND c.`authorCommentId` = #{authorCommentId}
+    </select>
+
+    <insert id="addComment" parameterType="com.shrine.web.entity.Comment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `comment` (`pageId`, `x`, `y`, `userId`, `comment`, `authorCommentId`) VALUES
+        (#{pageId}, #{x}, #{y}, #{userId}, #{comment}, #{authorCommentId})
+    </insert>
+</mapper>
