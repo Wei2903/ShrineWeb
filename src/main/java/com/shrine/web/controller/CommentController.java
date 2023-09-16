@@ -20,14 +20,12 @@ public class CommentController {
     @ResponseBody
     public Message comment(@RequestBody Comment comment, HttpServletRequest request){
         Object user = request.getSession().getAttribute("user");
-        if (!(user instanceof User)){
+        if (user instanceof User){
             String commentContent = comment.getComment();
             if (commentContent == null || "".equals(commentContent)){
                 return Message.getMessage("Comment cannot be empty");
             }
-//            User usr = (User) user;
-            User usr = new User();
-            usr.setId(new Long(4));
+            User usr = (User) user;
             System.out.println("Starting adding Comment:" + comment);
             commentService.addComment(comment);
             return Message.getMessage(usr.getName() + "make comment: {" + comment + "} successfully");
