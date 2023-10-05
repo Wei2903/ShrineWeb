@@ -43,5 +43,4 @@ public class Series implements Serializable {
         }
         return null;
     }
-
 }
