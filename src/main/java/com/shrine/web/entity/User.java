@@ -15,8 +15,8 @@ public class User implements Serializable {
     private String name;
     private String email;
     private String password;
-    private String apiKey;
-    private String token;
+//    private String apiKey;
+//    private String token;
     private int role;
     private int profileType;
     private int verify;     //1 = verified 0 = unverified

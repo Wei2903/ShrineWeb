@@ -9,6 +9,17 @@ import java.util.Base64;
 
 public class TokenGenerator {
 
+    public static String generateVerificationCode() {
+        SecureRandom secureRandom = new SecureRandom();
+        StringBuilder code = new StringBuilder();
+
+        for (int i = 0; i < 6; i++) {
+            int digit = secureRandom.nextInt(10);
+            code.append(digit);
+        }
+
+        return code.toString();
+    }
 
     public static String generateHmac(String key, String message) {
         try {

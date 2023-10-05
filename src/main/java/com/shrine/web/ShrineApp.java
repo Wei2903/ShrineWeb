@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 @Slf4j
 @SpringBootApplication
 @ServletComponentScan /* 用于扫描 @WebFilter */
+@ComponentScan
 @EnableTransactionManagement /* 用于控制事务 */
 public class ShrineApp {
     public static void main(String[] args) {
