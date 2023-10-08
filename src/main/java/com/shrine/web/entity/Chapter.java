@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class Chapter implements Serializable {
     private static final Long serialVersionUID = 1L;
-    private static final String pathPrefix = "/static/comics/";
+    private static final String pathPrefix = "/comics/";
     private Long id;
     private Long seriesId;
     private Long number;

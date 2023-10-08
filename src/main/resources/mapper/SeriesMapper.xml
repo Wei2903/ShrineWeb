@@ -25,13 +25,13 @@
     <select id="getAllSeries" resultType="com.shrine.web.entity.Series">
         SELECT
         s.id, s.portraitImage, s.landImage, s.title, s.logo, s.status, s.updatedAt
-        FROM series s WHERE s.status = 1
+        FROM series s WHERE s.isDeleted = 0
     </select>
 
     <select id="getSeriesDetailBySeriesId" parameterType="Integer" resultMap="SeriesResultMap">
         SELECT
         *
-        FROM series s WHERE s.id = #{id} AND s.status = 1
+        FROM series s WHERE s.id = #{id} AND s.isDeleted = 0
     </select>
 
 </mapper>

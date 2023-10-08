@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class Series implements Serializable {
     private static final Long serialVersionUID = 1L;
-    private static String imgPathPrefix = "/static/comics";
+    private static String imgPathPrefix = "/comics";
     private Long id;
     private String portraitImage;
     private String landImage;
