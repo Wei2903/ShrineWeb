@@ -64,7 +64,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             helper.setSubject(subject);
             String verifyToken = user.getVerifyToken();
             content = content.replace("[[CODE]]", verifyToken);
-            helper.setText(content,false);
+            helper.setText(content,true);
             mailSender.send(message);
             log.info("发送成功￥￥￥￥￥￥￥￥￥￥￥￥￥￥");
         } catch (UnsupportedEncodingException | MessagingException e){
