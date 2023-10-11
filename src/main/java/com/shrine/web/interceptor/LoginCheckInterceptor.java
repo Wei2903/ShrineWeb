@@ -24,7 +24,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         String jwt = req.getHeader("token");
 
         if(StringUtils.isEmpty(jwt)){
-            log.info("请求头token为空，返回未登录信息");
+            log.info("token is null");
             ResponseEntity responseEntity = ResponseEntity.badRequest().body("NOT_LOGIN");
             String notLogin = JSONObject.toJSONString(responseEntity);
             resp.getWriter().write(notLogin);

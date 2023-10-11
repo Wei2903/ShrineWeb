@@ -54,10 +54,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                     + "<br><span>Before you can start enjoying your manga, please verify your email by entering the following code!</span>"
                     + "<br><br>[[CODE]]"
                     + "<br><br><br><br><h5>Thanks,</h5><h4>Shrine Comics</h4>";
-            log.info("内容写好了$$$$$$$$$$$$$$$$$$$$");
+            log.info("content created$$$$$$$$$$$$$$$$$$$$");
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message);
-            log.info("MessageHelper创建好了$$$$$$$$$$$$$$$$$$$$$$$");
+            log.info("MessageHelper created$$$$$$$$$$$$$$$$$$$$$$$");
 
             helper.setFrom(fromAddress, senderName);
             helper.setTo(toAddress);
@@ -66,7 +66,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             content = content.replace("[[CODE]]", verifyToken);
             helper.setText(content,true);
             mailSender.send(message);
-            log.info("发送成功￥￥￥￥￥￥￥￥￥￥￥￥￥￥");
+            log.info("sent success$$$$$$$$$$$$$$$$$");
         } catch (UnsupportedEncodingException | MessagingException e){
             throw new RuntimeException(e);
         }
@@ -85,10 +85,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                     + "<br><br><h3>[[CODE]]</h3>"
                     +"<br><br>If you did not initiate this request, please ignore this email. Your password will remain unchanged."
                     + "<br><br><br><h5>Thanks,</h5><h4>Shrine Comics</h4>";
-            log.info("内容写好了$$$$$$$$$$$$$$$$$$$$");
+            log.info("content created$$$$$$$$$$$$$$$$$$$$");
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message);
-            log.info("MessageHelper创建好了$$$$$$$$$$$$$$$$$$$$$$$");
+            log.info("MessageHelper created$$$$$$$$$$$$$$$$$$$$$$$");
 
             helper.setFrom(fromAddress, senderName);
             helper.setTo(toAddress);
@@ -99,7 +99,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             content = content.replace("[[CODE]]", verifyToken);
             helper.setText(content,true);
             mailSender.send(message);
-            log.info("发送成功￥￥￥￥￥￥￥￥￥￥￥￥￥￥");
+            log.info("send success$$$$$$$$$$$$$$$$$$$$$$$$");
         } catch (UnsupportedEncodingException | MessagingException e){
             throw new RuntimeException(e);
         }
@@ -119,12 +119,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("id",userId);
 
-        log.info("更新前：" + this.getOne(lqw1));
+        log.info("before update:" + this.getOne(lqw1));
         this.update(user,updateWrapper);
         LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
         lqw.eq(User::getId,userId);
-        log.info("更新后：" + this.getOne(lqw));
-        log.info("用户信息更新成功");
+        log.info("after update:" + this.getOne(lqw));
+        log.info("update success");
 
     }
 
@@ -149,7 +149,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             LambdaQueryWrapper<User> lqw1 = new LambdaQueryWrapper<>();
             lqw1.eq(User::getId,userId);
             User user = this.getOne(lqw1);
-            log.info("名字：" + name);
+            log.info("name:" + name);
             user.setName(name);
             UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
             updateWrapper.eq("id",userId);
@@ -161,7 +161,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         LambdaQueryWrapper<User> lqw1 = new LambdaQueryWrapper<>();
         lqw1.eq(User::getId,userId);
         User user = this.getOne(lqw1);
-        log.info("更新前："+user);
+        log.info("name:"+user);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(password);
         user.setPassword(hashedPassword);

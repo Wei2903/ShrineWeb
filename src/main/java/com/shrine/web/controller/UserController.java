@@ -32,7 +32,7 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<?> login(@RequestBody User user, HttpServletRequest request){ //
+    public ResponseEntity<?> login(@RequestBody User user, HttpServletRequest request){
         log.info("user: {}",user);
         LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
         lqw.eq(User::getEmail,user.getEmail());
@@ -99,17 +99,6 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<?> register(@RequestBody User user){
         log.info("user:{}",user);
-//        // 判断前端传来的数据是否正常
-//        if(user.getName().isEmpty()||user.getPassword().isEmpty()||user.getEmail().isEmpty()){
-//            return ResponseEntity.badRequest().body("All fields are required");
-//        }
-//        String emailRegex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-//        if(!user.getEmail().matches(emailRegex)){
-//            return ResponseEntity.badRequest().body("Invalid email");
-//        }
-//        if(user.getPassword().length()< 8){
-//            return ResponseEntity.badRequest().body("Password should be at least 8 characters long");
-//        }
         LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
         lqw.eq(User::getEmail,user.getEmail());
         User one = userService.getOne(lqw);
@@ -152,17 +141,6 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<?> ResetPassword(@RequestBody User user){
         log.info("user:{}",user);
-//        // 判断前端传来的数据是否正常
-//        if(user.getName().isEmpty()||user.getPassword().isEmpty()||user.getEmail().isEmpty()){
-//            return ResponseEntity.badRequest().body("All fields are required");
-//        }
-//        String emailRegex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-//        if(!user.getEmail().matches(emailRegex)){
-//            return ResponseEntity.badRequest().body("Invalid email");
-//        }
-//        if(user.getPassword().length()< 8){
-//            return ResponseEntity.badRequest().body("Password should be at least 8 characters long");
-//        }
         LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
         lqw.eq(User::getEmail,user.getEmail());
         User one = userService.getOne(lqw);
@@ -178,32 +156,6 @@ public class UserController {
             return ResponseEntity.badRequest().body("invalid");
         }
     }
-
-
-
-
-//    @RequestMapping("/user-info")
-//    public ResponseEntity<?> getUserInfo(@RequestHeader("token") String token) {
-//        try {
-//            // 解析JWT令牌获取用户信息
-//            Claims claims = JwtUtils.parseJwt(token);
-//            String email = claims.get("email", String.class);
-//
-//            // 使用userId去数据库中查询用户信息
-//            User user = userService.getUserByEmail(email);
-//
-//            if (user != null) {
-//                // 返回用户信息
-//                return ResponseEntity.ok(user);
-//            } else {
-//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
-//            }
-//        } catch (Exception e) {
-//            // 处理解析JWT令牌异常
-//            e.printStackTrace();
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
-//        }
-//    }
 
     public Boolean checkJWT(@RequestHeader("token") String token){
         return JwtUtils.checkJWT(token);

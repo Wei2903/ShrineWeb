@@ -18,9 +18,9 @@ import java.util.List;
 
 @Slf4j
 @SpringBootApplication
-@ServletComponentScan /* 用于扫描 @WebFilter */
+@ServletComponentScan /* for scanning @WebFilter */
 @ComponentScan
-@EnableTransactionManagement /* 用于控制事务 */
+@EnableTransactionManagement
 public class ShrineApp {
     public static void main(String[] args) {
         ApplicationContext ioc = SpringApplication.run(ShrineApp.class, args);

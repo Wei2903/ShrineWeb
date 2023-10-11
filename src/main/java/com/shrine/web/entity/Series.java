@@ -38,7 +38,8 @@ public class Series implements Serializable {
     public String getPortraitImagePath(){
         if ((title != null && !"".equals(title))
                 && (portraitImage != null && !"".equals(portraitImage))){
-            String titleMidPath = title.replace(" ", "");
+            String titleMidPath = title.replaceAll("\\p{Punct}", "");
+                    titleMidPath = titleMidPath.replace(" ", "");
             return imgPathPrefix + "/" + titleMidPath + "/" + portraitImage;
         }
         return null;
