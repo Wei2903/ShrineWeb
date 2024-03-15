@@ -34,7 +34,7 @@ public class CollectableController {
         Object user = request.getSession().getAttribute("user");
         if (user instanceof User) {
             User usr = (User) user;
-            return collectableService.getAvatarsByUserId(usr.getId());
+            return collectableService.getStickersByUserId(usr.getId());
         }
         return null;
     }

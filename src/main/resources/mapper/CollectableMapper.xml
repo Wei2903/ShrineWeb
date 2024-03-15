@@ -22,7 +22,7 @@
         FROM `collectables` AS c
         JOIN `collectables_user` AS cu
         ON cu.`collectableId` = c.`id`
-        WHERE cu.`userId` = #{userId} AND cu.`type` = 1
+        WHERE cu.`userId` = #{userId} AND c.`type` = 1
         UNION
         SELECT
         c.`id`, c.`status`, c.`seriesId`, c.`artist`, c.`rarity`, c.`image`, c.`type`, c.`createdAt`, c.`updatedAt`
@@ -36,7 +36,7 @@
         FROM `collectables` AS c
         JOIN `collectables_user` AS cu
         ON cu.`collectableId` = c.`id`
-        WHERE cu.`userId` = #{userId} AND cu.`type` = 2
+        WHERE cu.`userId` = #{userId} AND c.`type` = 2
     </select>
 
 </mapper>
