@@ -6,5 +6,7 @@ import com.shrine.web.entity.Collectable;
 import java.util.List;
 
 public interface CollectableService extends IService<Collectable> {
-    List<Collectable> getCollectablesByUserId(Long userId);
+    List<Collectable> getAvatarsByUserId(Long userId);
+
+    List<Collectable> getStickersByUserId(Long userId);
 }

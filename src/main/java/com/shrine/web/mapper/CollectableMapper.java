@@ -7,5 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 @Mapper
 public interface CollectableMapper extends BaseMapper<Collectable> {
-    List<Collectable> queryCollectablesByUserId(Long userId);
+    List<Collectable> queryAvatarsByUserId(Long userId);
+
+    List<Collectable> queryStickersByUserId(Long userId);
 }

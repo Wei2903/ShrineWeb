@@ -17,15 +17,28 @@ public class CollectableController {
     @Autowired
     CollectableService collectableService;
 
-    @GetMapping("/collectable")
+    @GetMapping("/avatars")
     @ResponseBody
-    public List<Collectable> getCollectables(HttpServletRequest request) {
+    public List<Collectable> getAvatars(HttpServletRequest request) {
         Object user = request.getSession().getAttribute("user");
         if (user instanceof User) {
             User usr = (User) user;
-            return collectableService.getCollectablesByUserId(usr.getId());
+            return collectableService.getAvatarsByUserId(usr.getId());
         }
         return null;
     }
+
+    @GetMapping("/stickers")
+    @ResponseBody
+    public List<Collectable> getStickers(HttpServletRequest request) {
+        Object user = request.getSession().getAttribute("user");
+        if (user instanceof User) {
+            User usr = (User) user;
+            return collectableService.getAvatarsByUserId(usr.getId());
+        }
+        return null;
+    }
+
+
 
 }

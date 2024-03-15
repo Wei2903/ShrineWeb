@@ -26,4 +26,13 @@ public class Collectable implements Serializable {
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updatedAt;
+
+    public String getCollectablePath(){
+        if(type == 1){
+            return "/avatar/" + image;
+        } else if (type == 2){
+            return "/sticker/" + image;
+        }
+        return null;
+    }
 }

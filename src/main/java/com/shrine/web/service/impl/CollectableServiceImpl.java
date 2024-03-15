@@ -18,7 +18,12 @@ public class CollectableServiceImpl
     CollectableMapper collectableMapper;
 
     @Override
-    public List<Collectable> getCollectablesByUserId(Long userId) {
-        return collectableMapper.queryCollectablesByUserId(userId);
+    public List<Collectable> getAvatarsByUserId(Long userId) {
+        return collectableMapper.queryAvatarsByUserId(userId);
+    }
+
+    @Override
+    public List<Collectable> getStickersByUserId(Long userId) {
+        return collectableMapper.queryStickersByUserId(userId);
     }
 }
