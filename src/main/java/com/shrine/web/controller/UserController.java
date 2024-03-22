@@ -32,14 +32,14 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<?> login(@RequestBody User user, HttpServletRequest request){
+    public ResponseEntity<?> login(@RequestBody User user){
         log.info("user: {}",user);
         LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
         lqw.eq(User::getEmail,user.getEmail());
         User one = userService.getOne(lqw);
         // Add User to Session
-        HttpSession session = request.getSession();
-        session.setAttribute("user", one);
+//        HttpSession session = request.getSession();
+//        session.setAttribute("user", one);
         System.out.println(one);
         if(one == null || one.getVerify()==0){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email");
@@ -59,8 +59,9 @@ public class UserController {
         Map<String, Object> responseJson = new HashMap<>();
         responseJson.put("success", true);
         responseJson.put("username",one.getName());
-        responseJson.put("profile",one.getProfile());
+        responseJson.put("profile",one.getProfileId());
         responseJson.put("jwt", jwt);
+        responseJson.put("userId", one.getId());
 
         return ResponseEntity.ok(responseJson);
     }

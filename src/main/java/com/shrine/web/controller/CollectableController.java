@@ -20,23 +20,26 @@ public class CollectableController {
     @GetMapping("/avatars")
     @ResponseBody
     public List<Collectable> getAvatars(HttpServletRequest request) {
-        Object user = request.getSession().getAttribute("user");
-        if (user instanceof User) {
-            User usr = (User) user;
-            return collectableService.getAvatarsByUserId(usr.getId());
+        try {
+            Long userId = Long.parseLong(request.getHeader("userId"));
+            return collectableService.getAvatarsByUserId(userId);
+        }catch (Exception e){
+            System.out.println("Cannot get User ID");
+            return null;
         }
-        return null;
     }
 
     @GetMapping("/stickers")
     @ResponseBody
     public List<Collectable> getStickers(HttpServletRequest request) {
-        Object user = request.getSession().getAttribute("user");
-        if (user instanceof User) {
-            User usr = (User) user;
-            return collectableService.getStickersByUserId(usr.getId());
+
+        try {
+            Long userId = Long.parseLong(request.getHeader("userId"));
+            return collectableService.getStickersByUserId(userId);
+        }catch (Exception e){
+            System.out.println("Cannot get User ID");
+            return null;
         }
-        return null;
     }
 
 

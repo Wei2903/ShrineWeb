@@ -13,7 +13,7 @@ public class Collectable implements Serializable {
 
     private int status;
 
-    private Long seriesId;
+    private String seriesName;
     private String artist;
 
     private int rarity;
