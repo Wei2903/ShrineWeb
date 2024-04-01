@@ -9,4 +9,6 @@ public interface CollectableService extends IService<Collectable> {
     List<Collectable> getAvatarsByUserId(Long userId);
 
     List<Collectable> getStickersByUserId(Long userId);
+
+    Collectable getCurrentAvatar(Long collectableId);
 }

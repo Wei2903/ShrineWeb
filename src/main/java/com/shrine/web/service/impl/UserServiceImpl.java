@@ -3,8 +3,10 @@ package com.shrine.web.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.shrine.web.entity.LevelExp;
 import com.shrine.web.entity.User;
 import com.shrine.web.mapper.UserMapper;
+import com.shrine.web.service.LevelExpService;
 import com.shrine.web.service.UserService;
 
 import javax.mail.MessagingException;
@@ -27,6 +29,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Autowired
     private JavaMailSender mailSender;
 
+    @Autowired
+    LevelExpService levelExpService;
+
     @Override
     @Transactional
     public void saveNewUser(User newUser,String verifyToken,String hashedPassword) {
@@ -39,6 +44,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         newUser.setProfileId(1L);   //TBD
         newUser.setDefaultValue(0);     //TBD
         newUser.setIs_deleted(0);
+        newUser.setLevel(0);
+        newUser.setExp(0);
         this.save(newUser);
     }
 
@@ -172,10 +179,42 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+    public void updateProfile(Long userId, Long profileId) {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(User::getId,userId);
+        User user = this.getOne(lambdaQueryWrapper);
+        user.setProfileId(profileId);
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("id",userId);
+        this.update(user,updateWrapper);
+    }
+
+    @Override
     public User getUserByEmail(String email) {
         LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
         lqw.eq(User::getEmail,email);
         return this.getOne(lqw);
+    }
+
+
+
+    @Override
+    public void updateExp(Long userId, Integer exp) {
+        LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(User::getId,userId);
+        User user = this.getOne(lqw);
+        LambdaQueryWrapper<LevelExp> lqw1 = new LambdaQueryWrapper<>();
+        int max = 22;
+        lqw1.eq(LevelExp::getLevel,(user.getLevel()+1)>max?22:user.getLevel()+1);
+        LevelExp levelExp = levelExpService.getOne(lqw1);
+        user.setExp(user.getExp()+exp);
+        if(user.getExp()>=levelExp.getExp()){
+            user.setExp(user.getExp() - levelExp.getExp());
+            user.setLevel(user.getLevel()+1);
+        }
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("id",userId);
+        this.update(user,updateWrapper);
     }
 
 

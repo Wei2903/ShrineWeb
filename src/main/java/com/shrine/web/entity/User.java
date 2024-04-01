@@ -25,6 +25,8 @@ public class User implements Serializable {
     private Long profileId;
     private int defaultValue;
     private int is_deleted;
+    private int level;
+    private int exp;
 
 
 

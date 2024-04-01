@@ -26,4 +26,9 @@ public class CollectableServiceImpl
     public List<Collectable> getStickersByUserId(Long userId) {
         return collectableMapper.queryStickersByUserId(userId);
     }
+
+    @Override
+    public Collectable getCurrentAvatar(Long collectableId) {
+        return collectableMapper.selectById(collectableId);
+    }
 }

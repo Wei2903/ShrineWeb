@@ -35,8 +35,10 @@ public class CollectableController {
 
         try {
             Long userId = Long.parseLong(request.getHeader("userId"));
+            System.out.println(userId);
             return collectableService.getStickersByUserId(userId);
         }catch (Exception e){
+            System.out.println(e);
             System.out.println("Cannot get User ID");
             return null;
         }
