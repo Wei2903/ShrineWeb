@@ -2,6 +2,7 @@ package com.shrine.web.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.shrine.web.entity.User;
+import com.shrine.web.service.UserLoginService;
 import com.shrine.web.service.UserService;
 import com.shrine.web.utils.JwtUtils;
 import com.shrine.web.utils.TokenGenerator;
@@ -29,6 +30,8 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    UserLoginService userLoginService;
 
     @PostMapping("/login")
     @ResponseBody
@@ -62,6 +65,9 @@ public class UserController {
         responseJson.put("profile",one.getProfileId());
         responseJson.put("jwt", jwt);
         responseJson.put("userId", one.getId());
+
+        //update user login info
+        userLoginService.loginUpdate(one.getId());
 
         return ResponseEntity.ok(responseJson);
     }

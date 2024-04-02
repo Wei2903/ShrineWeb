@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shrine.web.mapper.UserLoginMapper">
+    <select id="getLastLoginDate" parameterType="Long" resultType="java.time.LocalDateTime">
+        SELECT
+        `lastLogin`
+        FROM `user_login` u WHERE u.userId = #{userId}
+    </select>
+
+    <update id="updateUserLoginContinuedDays" parameterType="Long">
+        UPDATE `shrine_testing`.`user_login`
+        SET `continuedDays` = (`continuedDays`+1)
+        WHERE (`userId` = #{userId});
+    </update>
+
+
+    <update id="clearUserLoginContinuedDays" parameterType="Long">
+        UPDATE `shrine_testing`.`user_login`
+        SET `continuedDays` = 1
+        WHERE (`userId` = #{userId});
+    </update>
+
+    <insert id="insertUserLogin" parameterType="Long">
+        INSERT INTO `user_login` (`userId`) VALUES (#{userId});
+    </insert>
+
+</mapper>

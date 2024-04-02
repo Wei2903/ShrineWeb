@@ -18,4 +18,11 @@ public class ExpOperationsServiceImpl extends ServiceImpl<ExpOperationsMapper, E
         lambdaQueryWrapper.eq(ExpOperations::getOperation,"reading");
         return this.getOne(lambdaQueryWrapper);
     }
+
+    @Override
+    public ExpOperations getExpOperationsLogin() {
+        LambdaQueryWrapper<ExpOperations> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(ExpOperations::getOperation,"login");
+        return this.getOne(lambdaQueryWrapper);
+    }
 }

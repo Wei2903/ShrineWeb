@@ -7,4 +7,6 @@ import com.shrine.web.entity.LevelExp;
 public interface ExpOperationsService extends IService<ExpOperations> {
 
     ExpOperations getExpOperationsPage();
+
+    ExpOperations getExpOperationsLogin();
 }
