@@ -24,14 +24,14 @@ public class UserLoginServiceImpl
 
     @Override
     public void loginUpdate(Long userId) {
-        // Update Login Exp
-        ExpOperations expOperationsLogin = expOperationsService.getExpOperationsLogin();
-        int exp = expOperationsLogin.getExp();
-        userService.updateExp(userId, exp);
         // Update User Login Info Table
         LocalDateTime lastLoginDate = userLoginMapper.getLastLoginDate(userId);
         if (lastLoginDate == null){
             userLoginMapper.insertUserLogin(userId);
+            // Update Login Exp
+            ExpOperations expOperationsLogin = expOperationsService.getExpOperationsLogin();
+            int exp = expOperationsLogin.getExp();
+            userService.updateExp(userId, exp);
             return;
         }
         if (isDayToday(lastLoginDate)){
@@ -42,6 +42,10 @@ public class UserLoginServiceImpl
         } else {
             userLoginMapper.clearUserLoginContinuedDays(userId);
         }
+        // Update Login Exp
+        ExpOperations expOperationsLogin = expOperationsService.getExpOperationsLogin();
+        int exp = expOperationsLogin.getExp();
+        userService.updateExp(userId, exp);
     }
 
     public static boolean isDayBeforeToday(LocalDateTime dateToCheck) {
