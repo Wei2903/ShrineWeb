@@ -6,6 +6,7 @@ import com.shrine.web.service.CollectableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,6 +30,18 @@ public class CollectableController {
         }
     }
 
+    @GetMapping("/avatars/sortedBy={sortedBy}")
+    @ResponseBody
+    public List<Collectable> getAvatarsSortedBy(HttpServletRequest request, @PathVariable("sortedBy") String sortedBy) {
+        try {
+            Long userId = Long.parseLong(request.getHeader("userId"));
+            return collectableService.getAvatarsByUserIdAndSortedBy(userId, sortedBy);
+        }catch (Exception e){
+            System.out.println("Cannot get User ID");
+            return null;
+        }
+    }
+
     @GetMapping("/stickers")
     @ResponseBody
     public List<Collectable> getStickers(HttpServletRequest request) {
@@ -39,6 +52,18 @@ public class CollectableController {
             return collectableService.getStickersByUserId(userId);
         }catch (Exception e){
             System.out.println(e);
+            System.out.println("Cannot get User ID");
+            return null;
+        }
+    }
+
+    @GetMapping("/stickers/sortedBy={sortedBy}")
+    @ResponseBody
+    public List<Collectable> getStickersSortedBy(HttpServletRequest request, @PathVariable("sortedBy") String sortedBy) {
+        try {
+            Long userId = Long.parseLong(request.getHeader("userId"));
+            return collectableService.getStickersByUserIdAndSortedBy(userId, sortedBy);
+        }catch (Exception e){
             System.out.println("Cannot get User ID");
             return null;
         }

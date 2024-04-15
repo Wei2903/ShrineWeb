@@ -23,6 +23,11 @@ public class CollectableServiceImpl
     }
 
     @Override
+    public List<Collectable> getAvatarsByUserIdAndSortedBy(Long userId, String sortedBy) {
+        return collectableMapper.queryAvatarsByUserIdAndSortedBy(userId, sortedBy);
+    }
+
+    @Override
     public List<Collectable> getStickersByUserId(Long userId) {
         return collectableMapper.queryStickersByUserId(userId);
     }
@@ -30,5 +35,10 @@ public class CollectableServiceImpl
     @Override
     public Collectable getCurrentAvatar(Long collectableId) {
         return collectableMapper.selectById(collectableId);
+    }
+
+    @Override
+    public List<Collectable> getStickersByUserIdAndSortedBy(Long userId, String sortedBy) {
+        return collectableMapper.queryStickersByUserIdAndSortedBy(userId, sortedBy);
     }
 }
