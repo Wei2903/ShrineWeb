@@ -30,6 +30,21 @@
         WHERE c.`isDefault` = 1
     </select>
 
+    <select id="queryAvatarsByUserIdAndSortedBy" parameterType="map" resultMap="CollectableResultMap">
+        SELECT
+        c.`id`, c.`status`, c.`seriesName`, c.`artist`, c.`rarity`, c.`image`, c.`type`, c.`createdAt`, c.`updatedAt`
+        FROM `collectable` AS c
+        JOIN `collectables_user` AS cu
+        ON cu.`collectableId` = c.`id`
+        WHERE cu.`userId` = #{userId} AND c.`type` = 1
+        UNION
+        SELECT
+        c.`id`, c.`status`, c.`seriesName`, c.`artist`, c.`rarity`, c.`image`, c.`type`, c.`createdAt`, c.`updatedAt`
+        FROM `collectable` AS c
+        WHERE c.`isDefault` = 1
+        ORDER BY #{sortedBy}
+    </select>
+
     <select id="queryStickersByUserId" parameterType="Long" resultMap="CollectableResultMap">
         SELECT
         c.`id`, c.`status`, c.`seriesName`, c.`artist`, c.`rarity`, c.`image`, c.`type`, c.`createdAt`, c.`updatedAt`
@@ -37,6 +52,16 @@
         JOIN `collectables_user` AS cu
         ON cu.`collectableId` = c.`id`
         WHERE cu.`userId` = #{userId} AND c.`type` = 2
+    </select>
+
+    <select id="queryStickersByUserIdAndSortedBy" parameterType="map" resultMap="CollectableResultMap">
+        SELECT
+        c.`id`, c.`status`, c.`seriesName`, c.`artist`, c.`rarity`, c.`image`, c.`type`, c.`createdAt`, c.`updatedAt`
+        FROM `collectable` AS c
+        JOIN `collectables_user` AS cu
+        ON cu.`collectableId` = c.`id`
+        WHERE cu.`userId` = #{userId} AND c.`type` = 2
+        ORDER BY #{sortedBy}
     </select>
 
 </mapper>
