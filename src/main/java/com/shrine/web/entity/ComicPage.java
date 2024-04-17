@@ -23,4 +23,6 @@ public class ComicPage {
     private LocalDateTime createdAt;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updatedAt;
+
+
 }

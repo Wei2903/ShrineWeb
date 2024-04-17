@@ -20,7 +20,9 @@ import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -67,7 +69,9 @@ public class UserController {
         responseJson.put("userId", one.getId());
 
         //update user login info
-        userLoginService.loginUpdate(one.getId());
+        Boolean flag = userLoginService.loginUpdate(one.getId());
+
+        responseJson.put("loginExp", flag);
 
         return ResponseEntity.ok(responseJson);
     }
@@ -168,6 +172,13 @@ public class UserController {
         return JwtUtils.checkJWT(token);
     }
 
+    @GetMapping("/expbar")
+    @ResponseBody
+    public ResponseEntity<?> getExpBar (@RequestHeader("userId") Long userId){
+
+        return ResponseEntity.ok(userService.getUserStatus(userId));
+
+    }
 
 
 }

@@ -1,11 +1,9 @@
 package com.shrine.web.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.shrine.web.entity.Author;
 import com.shrine.web.entity.User;
 
-import javax.mail.MessagingException;
-import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 public interface UserService  extends IService<User> {
     void saveNewUser (User newUser,String verifyToken,String hashedPassword);
@@ -25,5 +23,13 @@ public interface UserService  extends IService<User> {
 
     User getUserByEmail(String email);
     void updateExp(Long userId, Integer exp);
+
+    Double getExpPercentage(Long userId);
+
+    int getUserLevel(Long userId);
+
+    Long getUserCoins(Long userId);
+
+    Map getUserStatus(Long userId);
 
 }

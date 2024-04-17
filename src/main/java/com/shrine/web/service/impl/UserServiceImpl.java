@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -215,6 +217,53 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("id",userId);
         this.update(user,updateWrapper);
+    }
+
+    @Override
+    public Double getExpPercentage(Long userId) {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(User::getId,userId);
+        User user = this.getOne(lambdaQueryWrapper);
+        LambdaQueryWrapper<LevelExp> levelExpLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        levelExpLambdaQueryWrapper.eq(LevelExp::getLevel,user.getLevel()+1);
+        LevelExp levelExp = levelExpService.getOne(levelExpLambdaQueryWrapper);
+        System.out.println("用户id "+ user.getId());
+        System.out.println("计算为：" + (double)((levelExp.getExp()-user.getExp())/levelExp.getExp()));
+        System.out.println("用户等级 "+ user.getLevel());
+        System.out.println("用户经验 "+ user.getExp());
+        Double result = Math.round(((double)(user.getExp())/(double)levelExp.getExp())*100.0)/100.0;
+        return result;
+    }
+
+    @Override
+    public int getUserLevel(Long userId) {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(User::getId,userId);
+        User user = this.getOne(lambdaQueryWrapper);
+        return user.getLevel();
+    }
+
+    @Override
+    public Long getUserCoins(Long userId) {
+        return null;
+    }
+
+    @Override
+    public Map getUserStatus(Long userId) {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(User::getId,userId);
+        User user = this.getOne(lambdaQueryWrapper);
+        LambdaQueryWrapper<LevelExp> levelExpLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        levelExpLambdaQueryWrapper.eq(LevelExp::getLevel,user.getLevel()+1);
+        LevelExp levelExp = levelExpService.getOne(levelExpLambdaQueryWrapper);
+        Double percentage = Math.round(((double)(user.getExp())/(double)levelExp.getExp())*100.0)/1.0;
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("userName",user.getName());
+        resultMap.put("level",user.getLevel());
+        resultMap.put("progressPercentage",percentage);
+        resultMap.put("coins",2000);
+        return resultMap;
+
     }
 
 

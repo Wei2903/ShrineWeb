@@ -10,12 +10,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import java.util.List;
 
 @Slf4j
-//@Configuration
 public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         log.info("Start static resource mapping $$$$$$$$$$$$$$$$$$$$$$$$$");
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/");
+        registry.addResourceHandler("/**").addResourceLocations("file:///static/");
     }
 
 

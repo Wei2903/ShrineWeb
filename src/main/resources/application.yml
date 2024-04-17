@@ -12,6 +12,9 @@ spring:
     url: jdbc:mysql://localhost:3306/shrine_testing?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 1234
+  resources:
+    static-locations: file:/static
+
 
   mail:
     host: mail.shrinecomics.com
