@@ -34,4 +34,9 @@
         FROM series s WHERE s.id = #{id} AND s.isDeleted = 0
     </select>
 
+    <insert id="insertSeries" parameterType="com.shrine.web.entity.Series">
+        INSERT INTO `series` (`portraitImage`, `landImage`, `des`,`title`, `logo`, `status`, `colorCode`, `continueReadImage`)
+        VALUES (#{portraitImage}, #{landImage}, #{des}, #{title}, #{logo}, #{status}, #{colorCode}, #{continueReadImage})
+    </insert>
+
 </mapper>

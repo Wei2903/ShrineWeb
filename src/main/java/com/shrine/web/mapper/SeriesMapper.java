@@ -11,4 +11,6 @@ public interface SeriesMapper  extends BaseMapper<Series> {
     List<Series> getAllSeries();
 
     Series getSeriesDetailBySeriesId(Integer id);
+
+    void insertSeries(Series series);
 }
