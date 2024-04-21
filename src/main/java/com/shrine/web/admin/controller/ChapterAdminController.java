@@ -56,11 +56,13 @@ public class ChapterAdminController {
     }
 
     @PostMapping("/admin/chapters/modifyChapterTitle")
-    public String modifyChapterTitle (@RequestParam("ChapterId") String id,@RequestParam("newTitle") String newTitle){
+    public String modifyChapterTitle (@RequestParam("Id") Integer seriesId,
+                                      @RequestParam("ChapterId") String id,
+                                      @RequestParam("newTitle") String newTitle){
 
         boolean isRenameSuccessful = false;
 
-        Series series = seriesService.querySeriesDetail(Integer.parseInt(id));
+        Series series = seriesService.querySeriesDetail(seriesId);
         String oldTitle = adminChapterService.getChapterTitleById(Integer.parseInt(id));
         System.out.println("-----------------------------------------------------------------------------"+oldTitle);
         try {
@@ -78,8 +80,10 @@ public class ChapterAdminController {
     }
 
     @PostMapping ("/admin/chapters/modifyChapterCoverImage")
-    public String modifyChapterCoverImage (@RequestParam("ChapterId") String id,@RequestParam("newCoverImage") MultipartFile newCoverImage){
-        Series series = seriesService.querySeriesDetail(Integer.parseInt(id));
+    public String modifyChapterCoverImage (@RequestParam("Id") Integer seriesId,
+                                           @RequestParam("ChapterId") String id,
+                                           @RequestParam("newCoverImage") MultipartFile newCoverImage){
+        Series series = seriesService.querySeriesDetail(seriesId);
         String chapterTitle = adminChapterService.getChapterTitleById(Integer.parseInt(id));
         System.out.println("-----------------------" + series.getTitle());
         boolean isModifyCoverImageSuccessful = false;

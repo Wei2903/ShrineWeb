@@ -20,6 +20,7 @@ public class Chapter implements Serializable {
     private String logo;
     private String thumb;
     private int status;
+    @TableField(exist = false)
     private List<ComicPage> pages;
 
     @TableField(fill = FieldFill.INSERT)
