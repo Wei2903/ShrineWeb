@@ -65,7 +65,7 @@ public class IOUtils {
             File renameImage = new File(directoryPath,newName);
 
             if (oldImage.exists() && oldImage.isFile()) {
-                return oldImage.renameTo(renameImage);
+                oldImage.renameTo(renameImage);
             }
             return true;
         }
