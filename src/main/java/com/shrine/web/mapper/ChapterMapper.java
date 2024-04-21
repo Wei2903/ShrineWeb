@@ -11,4 +11,8 @@ public interface ChapterMapper extends BaseMapper<Chapter> {
     List<Chapter> queryChaptersBySeriesId(Integer id);
 
     Chapter getDetailedChapter(Integer chapterId);
+
+    Long getChaptersCountNumberBySeriesId(Integer id);
+
+    void insertChapter(Chapter chapter);
 }

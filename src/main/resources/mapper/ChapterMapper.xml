@@ -24,4 +24,13 @@
     <select id="getDetailedChapter" parameterType="Integer" resultMap="detailedChapterMap">
         SELECT * FROM `chapter` WHERE `id` = #{id} AND `status` = 1 ORDER BY `number`
     </select>
+
+    <select id="getChaptersCountNumberBySeriesId" parameterType="Integer" resultType="Long">
+        SELECT COUNT(*) FROM `chapter`WHERE `seriesId`= #{id}
+    </select>
+
+    <insert id="insertChapter" parameterType="com.shrine.web.entity.Chapter">
+        INSERT INTO `chapter`(`seriesId`, `number`,`title`, `finish`,`logo`,`thumb`,`status`)  Values
+        (#{seriesId},#{number},#{title}, #{finish},#{logo},#{thumb},#{status})
+    </insert>
 </mapper>
