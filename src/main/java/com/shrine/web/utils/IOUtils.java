@@ -54,11 +54,30 @@ public class IOUtils {
         return false;
     }
 
+    public static boolean renameChapterDirectory(Series series,String oldTitle, String newTitle) throws IOException{
+        String seriesTitle = StringUtils.removePunctuationAndSpace(series.getTitle());
+        oldTitle = StringUtils.removePunctuationAndSpace(oldTitle);
+        newTitle = StringUtils.removePunctuationAndSpace(newTitle);
+        String oldDirectoryPath = staticDirectoryPath + File.separator + "comics" + File.separator + seriesTitle + File.separator + oldTitle;
+        String newDirectoryPath = staticDirectoryPath + File.separator + "comics" + File.separator + seriesTitle + File.separator + newTitle;
+        File oldDirectory = new File(oldDirectoryPath);
+        File newDirectory = new File(newDirectoryPath);
+        if (oldDirectory.exists() && oldDirectory.isDirectory()) {
+            return oldDirectory.renameTo(newDirectory);
+        }
+        return false;
+    }
+
     public static boolean modifyImage(String title, String imageName, MultipartFile newImage) throws IOException {
         title = StringUtils.removePunctuationAndSpace(title);
         String newName = newImage.getOriginalFilename();
         String directoryPath = staticDirectoryPath + File.separator + "comics" + File.separator + title;
         Path imagePath = Paths.get(directoryPath + File.separator + imageName);
+        System.out.println("--------------------------------");
+        System.out.println("title:" + title);
+        System.out.println("newName:" + newName);
+        System.out.println("directoryPath:" + directoryPath);
+        System.out.println("imagePath:" + imagePath.toString());
         if (Files.exists(imagePath) && Files.isRegularFile(imagePath)) {
             Files.write(imagePath, newImage.getBytes());
             File oldImage = new File(directoryPath, imageName);
@@ -71,4 +90,28 @@ public class IOUtils {
         }
         return false;
     }
+    public static boolean modifyChapterImage(String seriesTitle, String title, String imageName, MultipartFile newImage) throws IOException {
+        seriesTitle = StringUtils.removePunctuationAndSpace(seriesTitle);
+        title = StringUtils.removePunctuationAndSpace(title);
+        String newName = newImage.getOriginalFilename();
+        String directoryPath = staticDirectoryPath + File.separator + "comics" + File.separator + seriesTitle + File.separator +title;
+        Path imagePath = Paths.get(directoryPath + File.separator + imageName);
+        System.out.println("--------------------------------");
+        System.out.println("title:" + title);
+        System.out.println("newName:" + newName);
+        System.out.println("directoryPath:" + directoryPath);
+        System.out.println("imagePath:" + imagePath.toString());
+        if (Files.exists(imagePath) && Files.isRegularFile(imagePath)) {
+            Files.write(imagePath, newImage.getBytes());
+            File oldImage = new File(directoryPath, imageName);
+            File renameImage = new File(directoryPath,newName);
+
+            if (oldImage.exists() && oldImage.isFile()) {
+                oldImage.renameTo(renameImage);
+            }
+            return true;
+        }
+        return false;
+    }
+
 }

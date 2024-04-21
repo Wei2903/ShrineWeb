@@ -1,8 +1,10 @@
 package com.shrine.web.admin.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.shrine.web.admin.service.AdminChapterService;
 import com.shrine.web.entity.Chapter;
 import com.shrine.web.entity.Series;
+import com.shrine.web.service.ChapterService;
 import com.shrine.web.service.SeriesService;
 import com.shrine.web.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class ChapterAdminController {
     AdminChapterService adminChapterService;
     @Autowired
     SeriesService seriesService;
+
+    @Autowired
+    ChapterService chapterService;
 
     @PostMapping("/admin/chapters/addChapters")
     public String addChapter(
@@ -48,6 +53,47 @@ public class ChapterAdminController {
         chapter.setStatus(1);
         adminChapterService.insertChapter(chapter);
         return "Add Chapter Successful";
+    }
+
+    @PostMapping("/admin/chapters/modifyChapterTitle")
+    public String modifyChapterTitle (@RequestParam("ChapterId") String id,@RequestParam("newTitle") String newTitle){
+
+        boolean isRenameSuccessful = false;
+
+        Series series = seriesService.querySeriesDetail(Integer.parseInt(id));
+        String oldTitle = adminChapterService.getChapterTitleById(Integer.parseInt(id));
+        System.out.println("-----------------------------------------------------------------------------"+oldTitle);
+        try {
+            isRenameSuccessful = IOUtils.renameChapterDirectory(series,oldTitle,newTitle);
+            if(!isRenameSuccessful){
+                return "Rename failed.";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "File IO Error, Cannot rename Series";
+        }
+
+        adminChapterService.updateChapterTitle(Long.parseLong(id),newTitle);
+        return "Modify Series Title Successfully";
+    }
+
+    @PostMapping ("/admin/chapters/modifyChapterCoverImage")
+    public String modifyChapterCoverImage (@RequestParam("ChapterId") String id,@RequestParam("newCoverImage") MultipartFile newCoverImage){
+        Series series = seriesService.querySeriesDetail(Integer.parseInt(id));
+        String chapterTitle = adminChapterService.getChapterTitleById(Integer.parseInt(id));
+        System.out.println("-----------------------" + series.getTitle());
+        boolean isModifyCoverImageSuccessful = false;
+        try {
+            isModifyCoverImageSuccessful = IOUtils.modifyChapterImage(series.getTitle(),chapterTitle,series.getPortraitImage(),newCoverImage);
+            if(!isModifyCoverImageSuccessful){
+                return "modify image failed.";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "File IO Error, Cannot modify image.";
+        }
+        adminChapterService.updateChapterCoverImage(Integer.parseInt(id),newCoverImage.getOriginalFilename());
+        return "Modify Cover Image Successfully";
     }
 
 
