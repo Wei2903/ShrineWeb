@@ -6,6 +6,7 @@ import com.shrine.web.service.SeriesService;
 import com.shrine.web.utils.IOUtils;
 import com.shrine.web.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -65,4 +66,54 @@ public class SeriesAdminController {
         adminSeriesService.insertSeries(series);
         return "Add Series Successfully";
     }
+
+    @PostMapping ("/admin/series/modifySeriesTitle")
+    public String modifySeriesTitle (@RequestParam("SeriesId") String id,@RequestParam("newTitle") String newTitle){
+
+        boolean isRenameSuccessful = false;
+        Series series = seriesService.querySeriesDetail(Integer.parseInt(id));
+        String oldTitle = series.getTitle();
+        System.out.println("-----------------------------------------------------------------------------"+oldTitle);
+        try {
+            isRenameSuccessful = IOUtils.renameSeriesDirectory(oldTitle,newTitle);
+            if(!isRenameSuccessful){
+                return "Rename failed.";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "File IO Error, Cannot rename Series";
+        }
+
+        adminSeriesService.updateSeriesTitle(series.getId(), newTitle);
+        return "Modify Series Title Successfully";
+    }
+
+    @PostMapping ("/admin/series/modifySeriesDes")
+    public String modifySeriesDes (@RequestParam("SeriesId") String id,@RequestParam("newDes") String newDes){
+        Series series = seriesService.querySeriesDetail(Integer.parseInt(id));
+        adminSeriesService.updateSeriesDescription(series.getId(), newDes);
+        return "Modify Series Description Successfully";
+    }
+
+    @PostMapping ("/admin/series/modifySeriesCoverImage")
+    public String modifySeriesCoverImage (@RequestParam("SeriesId") String id,@RequestParam("newCoverImage") MultipartFile newCoverImage){
+        Series series = seriesService.querySeriesDetail(Integer.parseInt(id));
+        boolean isModifyCoverImageSuccessful = false;
+        try {
+            isModifyCoverImageSuccessful = IOUtils.modifyImage(series.getTitle(),series.getPortraitImage(),newCoverImage);
+            if(!isModifyCoverImageSuccessful){
+                return "modify image failed.";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "File IO Error, Cannot modify image.";
+        }
+        adminSeriesService.updateSeriesCoverImage(series.getId(), newCoverImage.getOriginalFilename());
+        return "Modify Cover Image Successfully";
+    }
+
+
+
+
+
 }

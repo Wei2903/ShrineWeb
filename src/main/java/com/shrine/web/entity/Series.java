@@ -18,8 +18,11 @@ public class Series implements Serializable {
     private String des;
     private String title;
     private String logo;
+    @TableField(exist = false)
     private List<Author> authors;
+    @TableField(exist = false)
     private List<Chapter> chapters;
+    @TableField(exist = false)
     private List<Cast> casts;
 
     @TableField(fill = FieldFill.INSERT)

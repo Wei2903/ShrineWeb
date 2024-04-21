@@ -40,4 +40,34 @@ public class IOUtils {
         Files.write(path, chapterImage.getBytes());
         return true;
     }
+
+    public static boolean renameSeriesDirectory(String oldTitle, String newTitle) throws IOException{
+        oldTitle = StringUtils.removePunctuationAndSpace(oldTitle);
+        newTitle = StringUtils.removePunctuationAndSpace(newTitle);
+        String oldDirectoryPath = staticDirectoryPath + File.separator + "comics" + File.separator + oldTitle;
+        String newDirectoryPath = staticDirectoryPath + File.separator + "comics" + File.separator + newTitle;
+        File oldDirectory = new File(oldDirectoryPath);
+        File newDirectory = new File(newDirectoryPath);
+        System.out.println("---------------------------------------------------");
+        System.out.println(oldTitle);
+        System.out.println(oldDirectoryPath);
+        System.out.println(newTitle);
+        System.out.println(newDirectoryPath);
+        System.out.println("-------------------------------------------------不存在");
+        if (oldDirectory.exists() && oldDirectory.isDirectory()) {
+            return oldDirectory.renameTo(newDirectory);
+        }
+        return false;
+    }
+
+    public static boolean modifyImage(String title, String imageName, MultipartFile newImage) throws IOException {
+        title = StringUtils.removePunctuationAndSpace(title);
+        String directoryPath = staticDirectoryPath + File.separator + "comics" + File.separator + title;
+        Path imagePath = Paths.get(directoryPath + File.separator + imageName);
+        if (Files.exists(imagePath) && Files.isRegularFile(imagePath)) {
+            Files.write(imagePath, newImage.getBytes());
+            return true;
+        }
+        return false;
+    }
 }

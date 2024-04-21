@@ -26,4 +26,6 @@ public class SeriesServiceImpl
     public Series querySeriesDetail(Integer id) {
         return seriesMapper.getSeriesDetailBySeriesId(id);
     }
+
+
 }
