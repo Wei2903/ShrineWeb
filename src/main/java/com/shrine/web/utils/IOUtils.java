@@ -48,12 +48,6 @@ public class IOUtils {
         String newDirectoryPath = staticDirectoryPath + File.separator + "comics" + File.separator + newTitle;
         File oldDirectory = new File(oldDirectoryPath);
         File newDirectory = new File(newDirectoryPath);
-        System.out.println("---------------------------------------------------");
-        System.out.println(oldTitle);
-        System.out.println(oldDirectoryPath);
-        System.out.println(newTitle);
-        System.out.println(newDirectoryPath);
-        System.out.println("-------------------------------------------------不存在");
         if (oldDirectory.exists() && oldDirectory.isDirectory()) {
             return oldDirectory.renameTo(newDirectory);
         }
@@ -62,10 +56,17 @@ public class IOUtils {
 
     public static boolean modifyImage(String title, String imageName, MultipartFile newImage) throws IOException {
         title = StringUtils.removePunctuationAndSpace(title);
+        String newName = newImage.getOriginalFilename();
         String directoryPath = staticDirectoryPath + File.separator + "comics" + File.separator + title;
         Path imagePath = Paths.get(directoryPath + File.separator + imageName);
         if (Files.exists(imagePath) && Files.isRegularFile(imagePath)) {
             Files.write(imagePath, newImage.getBytes());
+            File oldImage = new File(directoryPath, imageName);
+            File renameImage = new File(directoryPath,newName);
+
+            if (oldImage.exists() && oldImage.isFile()) {
+                return oldImage.renameTo(renameImage);
+            }
             return true;
         }
         return false;
