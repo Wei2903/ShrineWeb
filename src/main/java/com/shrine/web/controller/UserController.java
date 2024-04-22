@@ -35,6 +35,7 @@ public class UserController {
     @Autowired
     UserLoginService userLoginService;
 
+    // User Login
     @PostMapping("/login")
     @ResponseBody
     public ResponseEntity<?> login(@RequestBody User user){
@@ -76,6 +77,7 @@ public class UserController {
         return ResponseEntity.ok(responseJson);
     }
 
+    // Send verification email to user's email address
     @PostMapping("send-verification")
     @ResponseBody
     public ResponseEntity<?> sendVerification (@RequestBody User user){
@@ -106,6 +108,7 @@ public class UserController {
         return ResponseEntity.ok(responseJson);
     }
 
+    // User register
     @PostMapping("/register")
     @ResponseBody
     public ResponseEntity<?> register(@RequestBody User user){
@@ -129,6 +132,7 @@ public class UserController {
         }
     }
 
+    // Send reset password email to user's email address
     @PostMapping("/send-reset-password")
     @ResponseBody
     public ResponseEntity<?> sendResetPassword(@RequestBody User user){
@@ -148,6 +152,7 @@ public class UserController {
         return ResponseEntity.ok(responseJson);
     }
 
+    // Actually user's reset password
     @PostMapping("/reset-password")
     @ResponseBody
     public ResponseEntity<?> ResetPassword(@RequestBody User user){

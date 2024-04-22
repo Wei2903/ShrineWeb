@@ -51,6 +51,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         this.save(newUser);
     }
 
+    // Send verification email to user's email address
     @Override
     public void sendVerificationEmail(User user) {
 
@@ -82,6 +83,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     }
 
+    // Send reset password email to user's email address
     @Override
     public void sendResetPasswordEmail(User user) {
         try{

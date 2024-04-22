@@ -15,7 +15,7 @@ public class Author implements Serializable {
     private Long userId;
     private String image;
     private String name;
-    private int status;
+    private int status; // if this author exists (or is deleted)
 
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdAt;

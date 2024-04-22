@@ -7,6 +7,7 @@ import com.shrine.web.entity.Series;
 import java.util.List;
 
 public interface SeriesService  extends IService<Series> {
+    // Check impl/SeriesServiceImpl.java for actual implementation
     List<Series> queryAllSeries();
 
     Series querySeriesDetail(Integer id);

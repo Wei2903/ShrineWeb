@@ -17,16 +17,19 @@ public class CollectableServiceImpl
     @Autowired
     CollectableMapper collectableMapper;
 
+    // Default function to get all avatars that user has
     @Override
     public List<Collectable> getAvatarsByUserId(Long userId) {
         return collectableMapper.queryAvatarsByUserId(userId);
     }
 
+    // Get all avatars that user has and sorted them using given parameter 'sortedBy'
     @Override
     public List<Collectable> getAvatarsByUserIdAndSortedBy(Long userId, String sortedBy) {
         return collectableMapper.queryAvatarsByUserIdAndSortedBy(userId, sortedBy);
     }
 
+    // Default function to get all stickers that user has
     @Override
     public List<Collectable> getStickersByUserId(Long userId) {
         return collectableMapper.queryStickersByUserId(userId);
@@ -37,6 +40,7 @@ public class CollectableServiceImpl
         return collectableMapper.selectById(collectableId);
     }
 
+    // Get all stickers that user has and sorted them using given parameter 'sortedBy'
     @Override
     public List<Collectable> getStickersByUserIdAndSortedBy(Long userId, String sortedBy) {
         return collectableMapper.queryStickersByUserIdAndSortedBy(userId, sortedBy);

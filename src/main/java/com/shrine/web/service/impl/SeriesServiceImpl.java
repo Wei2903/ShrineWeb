@@ -17,11 +17,13 @@ public class SeriesServiceImpl
     @Autowired
     SeriesMapper seriesMapper;
 
+    // Get all series to display on the mainpage
     @Override
     public List<Series> queryAllSeries() {
         return seriesMapper.getAllSeries();
     }
 
+    // Get details of a series using its id
     @Override
     public Series querySeriesDetail(Integer id) {
         return seriesMapper.getSeriesDetailBySeriesId(id);

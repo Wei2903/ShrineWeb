@@ -10,9 +10,13 @@ import java.util.List;
 
 @Mapper
 public interface CommentMapper extends BaseMapper<Comment> {
+    // Check main/resources/mapper/CommentMapper.xml for actual implementation
+
     List<Comment> getCommentsByPageId(Integer PageId);
 
     List<Comment> getToAuthorCommentByPageIdAndAuthorCommentId(@Param("pageId") Integer PageId,
                                              @Param("AuthorCommentId") Integer authorCommentId);
+
+    // Add comment under a chapter
     void addComment(Comment comment);
 }

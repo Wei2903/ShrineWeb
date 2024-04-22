@@ -13,13 +13,13 @@ public class Chapter implements Serializable {
     private static final Long serialVersionUID = 1L;
     private static final String pathPrefix = "/comics/";
     private Long id;
-    private Long seriesId;
+    private Long seriesId; // which series this chapter belongs to
     private Long number;
     private String title;
-    private int finish;
+    private int finish; // if this chapter is finished updating (some author may upload a full chapter in several different updates)
     private String logo;
     private String thumb;
-    private int status;
+    private int status; // if this chapter exists (or is deleted)
     private List<ComicPage> pages;
 
     @TableField(fill = FieldFill.INSERT)

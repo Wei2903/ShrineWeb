@@ -24,6 +24,7 @@ public class ChapterController {
     @Autowired
     ExpOperationsService expOperationsService;
 
+    // Get all pages for a selected Chapter
     @ResponseBody
     @GetMapping("/chapter/{chapterId}")
     public Chapter getDetailedChapter(@PathVariable("chapterId") String chapterId){
@@ -32,7 +33,7 @@ public class ChapterController {
     }
 
 
-
+    // Increase experience for the user when reading through pages
     @PostMapping("/experience/increase")
     @ResponseBody
     public ResponseEntity<?> addExp(@RequestHeader("userId") Long userId, @RequestHeader("page") int page){

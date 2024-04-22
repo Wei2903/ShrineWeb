@@ -18,12 +18,14 @@ public class SeriesController {
     @Autowired
     SeriesService seriesService;
 
+    // Get all series to display on the mainpage
     @GetMapping("/home")
     @ResponseBody
     public List<Series> getAllSeries(HttpServletResponse response){
         return seriesService.queryAllSeries();
     }
 
+    // Get details of a series using its id
     @GetMapping("/home/{id}")
     @ResponseBody
     public Series getSeriesDetailById(@PathVariable("id") String id){

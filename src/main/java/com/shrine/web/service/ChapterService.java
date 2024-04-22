@@ -7,5 +7,6 @@ import com.shrine.web.entity.ComicPage;
 import java.util.List;
 
 public interface ChapterService extends IService<Chapter> {
+    // Check impl/ChapterServiceImpl.java for actual implementation
     Chapter getComicPagesByChapterId(Integer chapterId);
 }

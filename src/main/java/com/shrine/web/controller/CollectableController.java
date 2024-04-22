@@ -18,6 +18,7 @@ public class CollectableController {
     @Autowired
     CollectableService collectableService;
 
+    // Default function to get all avatars that user has
     @GetMapping("/avatars")
     @ResponseBody
     public List<Collectable> getAvatars(HttpServletRequest request) {
@@ -30,6 +31,7 @@ public class CollectableController {
         }
     }
 
+    // Get all avatars that user has and sorted them using given parameter 'sortedBy'
     @GetMapping("/avatars/sortedBy={sortedBy}")
     @ResponseBody
     public List<Collectable> getAvatarsSortedBy(HttpServletRequest request, @PathVariable("sortedBy") String sortedBy) {
@@ -42,6 +44,7 @@ public class CollectableController {
         }
     }
 
+    // Default function to get all stickers that user has
     @GetMapping("/stickers")
     @ResponseBody
     public List<Collectable> getStickers(HttpServletRequest request) {
@@ -57,6 +60,7 @@ public class CollectableController {
         }
     }
 
+    // Get all stickers that user has and sorted them using given parameter 'sortedBy'
     @GetMapping("/stickers/sortedBy={sortedBy}")
     @ResponseBody
     public List<Collectable> getStickersSortedBy(HttpServletRequest request, @PathVariable("sortedBy") String sortedBy) {

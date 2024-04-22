@@ -17,6 +17,7 @@ public class ChapterServiceImpl
     @Autowired
     ChapterMapper chapterMapper;
 
+    // Get all pages for a selected Chapter
     @Override
     public Chapter getComicPagesByChapterId(Integer chapterId) {
         return chapterMapper.getDetailedChapter(chapterId);

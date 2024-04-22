@@ -31,7 +31,7 @@ public class Series implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updatedAt;
 
-    private int status;
+    private int status; // if this series exists (or is deleted)
     private String colorCode;
     private String continueReadImage;
 
