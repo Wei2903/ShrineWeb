@@ -16,6 +16,7 @@ public class CommentServiceImpl
     @Autowired
     CommentMapper mapper;
 
+    // Add comment under a chapter
     @Transactional
     @Override
     public void addComment(Comment comment) {

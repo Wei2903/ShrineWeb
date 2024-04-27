@@ -13,13 +13,13 @@ public class Collectable implements Serializable {
 
     private int status;
 
-    private String seriesName;
-    private String artist;
+    private String seriesName; // which series the image on the collectable is from
+    private String artist; // which artist made the image on the collectable
 
     private int rarity;
     private String image;
 
-    private int type;
+    private int type; // 1 means this collectable is an avatar, 2 means this collectable is a sticker
 
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdAt;

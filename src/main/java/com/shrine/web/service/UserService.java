@@ -6,6 +6,8 @@ import com.shrine.web.entity.User;
 import java.util.Map;
 
 public interface UserService  extends IService<User> {
+    // Check impl/UserServiceImpl.java for actual implementation
+
     void saveNewUser (User newUser,String verifyToken,String hashedPassword);
     void sendVerificationEmail(User user);
 

@@ -16,6 +16,7 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
+    // Add comment under a chapter
     @GetMapping("/comment")
     @ResponseBody
     public Message comment(@RequestBody Comment comment, HttpServletRequest request){

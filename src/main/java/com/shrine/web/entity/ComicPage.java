@@ -17,7 +17,7 @@ public class ComicPage {
     private List<AuthorComment> authorComments;
     private Integer doubleSpread;
     private Integer isVisible;
-    private Integer status;
+    private Integer status; // if this page exists (or is deleted)
 
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createdAt;
