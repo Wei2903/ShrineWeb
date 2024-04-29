@@ -30,4 +30,7 @@ public class Chapter implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updatedAt;
 
+    public String getCover() {
+        return pathPrefix+logo;
+    }
 }

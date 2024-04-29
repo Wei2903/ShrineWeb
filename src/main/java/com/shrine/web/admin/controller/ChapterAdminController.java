@@ -7,6 +7,7 @@ import com.shrine.web.entity.Series;
 import com.shrine.web.service.ChapterService;
 import com.shrine.web.service.SeriesService;
 import com.shrine.web.utils.IOUtils;
+import com.shrine.web.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,7 +48,9 @@ public class ChapterAdminController {
         chapter.setSeriesId(series.getId());
         chapter.setNumber(maxSeriesChapterNumber+1);
         chapter.setTitle(title);
-        chapter.setLogo(chapterImage.getOriginalFilename());
+        chapter.setLogo(StringUtils.removePunctuationAndSpace(series.getTitle())+"/"+
+                StringUtils.removePunctuationAndSpace(title)+"/"
+                +chapterImage.getOriginalFilename());
         chapter.setThumb("Thumb Haven't been Implemented yet");
         chapter.setFinish(1);
         chapter.setStatus(1);
