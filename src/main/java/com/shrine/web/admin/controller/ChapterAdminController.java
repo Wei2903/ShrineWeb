@@ -9,12 +9,11 @@ import com.shrine.web.service.SeriesService;
 import com.shrine.web.utils.IOUtils;
 import com.shrine.web.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 public class ChapterAdminController {
@@ -25,6 +24,13 @@ public class ChapterAdminController {
 
     @Autowired
     ChapterService chapterService;
+
+    @GetMapping("/admin/chapter/{id}")
+    @ResponseBody
+    public Chapter getChapterDetailById(@PathVariable("id") String id){
+        Chapter chapter = chapterService.getComicPagesByChapterId(Integer.parseInt(id));
+        return chapter;
+    }
 
     @PostMapping("/admin/chapters/addChapters")
     public String addChapter(
@@ -103,5 +109,16 @@ public class ChapterAdminController {
         return "Modify Cover Image Successfully";
     }
 
+    @PostMapping("/admin/chapters/deleteChapter")
+    public String deleteChapter( @RequestParam("chapterId") Integer chapterId) {
+        adminChapterService.deleteChapter(chapterId);
+        return "Delete chapter Successful";
+    }
+
+    @PostMapping("/admin/chapters/batchDeleteChapters")
+    public String batchDeleteChapters(@RequestParam("chapterId") List<Integer> chapterIds) {
+        adminChapterService.deleteBatchChapter(chapterIds);
+        return "Delete chapters Successful";
+    }
 
 }

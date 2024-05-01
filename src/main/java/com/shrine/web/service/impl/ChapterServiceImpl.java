@@ -1,5 +1,6 @@
 package com.shrine.web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shrine.web.entity.Chapter;
 import com.shrine.web.mapper.ChapterMapper;
@@ -21,5 +22,12 @@ public class ChapterServiceImpl
     @Override
     public Chapter getComicPagesByChapterId(Integer chapterId) {
         return chapterMapper.getDetailedChapter(chapterId);
+    }
+
+    @Override
+    public void deleteChapter(Integer chapterId) {
+        LambdaQueryWrapper<Chapter> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Chapter::getId,chapterId);
+        this.remove(lambdaQueryWrapper);
     }
 }

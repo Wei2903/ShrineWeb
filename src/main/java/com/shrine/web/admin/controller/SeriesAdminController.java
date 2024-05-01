@@ -1,5 +1,6 @@
 package com.shrine.web.admin.controller;
 
+import com.shrine.web.admin.service.AdminChapterService;
 import com.shrine.web.admin.service.AdminSeriesService;
 import com.shrine.web.entity.Series;
 import com.shrine.web.service.SeriesService;
@@ -25,6 +26,9 @@ public class SeriesAdminController {
     SeriesService seriesService;
     @Autowired
     AdminSeriesService adminSeriesService;
+
+    @Autowired
+    AdminChapterService adminChapterService;
 
     @GetMapping("/admin/series")
     @ResponseBody
@@ -112,7 +116,29 @@ public class SeriesAdminController {
         return "Modify Cover Image Successfully";
     }
 
+    @PostMapping("/admin/series/deleteSeries")
+    public String deleteSeries( @RequestParam("seriesId") Integer seriesId) {
+        List<Integer> chapterIdsList = adminChapterService.getChaptersBySeriesId(seriesId);
+        adminChapterService.deleteBatchChapter(chapterIdsList);
+        Series series = seriesService.querySeriesDetail(seriesId);
+        String seriesTitle = series.getTitle();
+        IOUtils.deleteSeries(seriesTitle);
+        adminSeriesService.deleteSeries(seriesId);
+        return "Delete series Successful";
+    }
 
+    @PostMapping("/admin/series/batchDeleteSeries")
+    public String batchDeleteSeries(@RequestParam("seriesId") List<Integer> seriesIds) {
+        for(Integer seriesId:seriesIds){
+            List<Integer> chapterIdsList = adminChapterService.getChaptersBySeriesId(seriesId);
+            adminChapterService.deleteBatchChapter(chapterIdsList);
+            Series series = seriesService.querySeriesDetail(seriesId);
+            String seriesTitle = series.getTitle();
+            IOUtils.deleteSeries(seriesTitle);
+            adminSeriesService.deleteSeries(seriesId);
+        }
+        return "Delete series Successful";
+    }
 
 
 

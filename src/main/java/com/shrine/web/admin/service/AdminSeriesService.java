@@ -11,4 +11,5 @@ public interface AdminSeriesService extends IService<Series> {
     public void updateSeriesDescription(Long seriesId, String description);
     public void updateSeriesCoverImage(Long seriesId, String coverImage);
 
+    void deleteSeries(Integer seriesId);
 }

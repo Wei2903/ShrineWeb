@@ -62,4 +62,11 @@ public class AdminSeriesServiceImpl extends ServiceImpl<SeriesMapper,Series> imp
         updateWrapper.eq("id",seriesId);
         this.update(series,updateWrapper);
     }
+
+    @Override
+    public void deleteSeries(Integer seriesId) {
+        LambdaQueryWrapper<Series> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Series::getId,seriesId);
+        this.remove(lambdaQueryWrapper);
+    }
 }

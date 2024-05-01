@@ -13,7 +13,9 @@ public class ComicPage {
     private String imgPath;
     private Long chapterId;
     private Integer pageNum;
+    @TableField(exist = false)
     private List<Comment> comments;
+    @TableField(exist = false)
     private List<AuthorComment> authorComments;
     private Integer doubleSpread;
     private Integer isVisible;
